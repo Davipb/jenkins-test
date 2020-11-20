@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'cd src && ./gradlew build'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'cd src && ./gradlew test'
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                archiveArtifacts 'src/app/build/libs/app.jar'
+            }
+        }
+    }
+}
